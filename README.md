@@ -188,4 +188,4 @@ The dev server reads `frontend/.env.local` to prefill the login so reloads do no
 
 ## License
 
-Not specified for this contest submission.
+MIT — see [LICENSE](LICENSE) for the full text. Copyright (c) 2026 David36791.
