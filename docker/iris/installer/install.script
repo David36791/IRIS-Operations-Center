@@ -1,0 +1,21 @@
+; IRIS Operations Center — build-time installer.
+;
+; Compile the application classes into USER, then hand over to the shared
+; installer class. That class is also what `zpm install` invokes, so both
+; installation paths create the web applications the same way.
+
+zn "USER"
+Set tSC = ##class(%SYSTEM.OBJ).LoadDir("/opt/irisbuild/src", "ck", .errlog, 1)
+If $$$ISERR(tSC) {
+    Do $System.Status.DisplayError(tSC)
+    Halt 1
+}
+
+Set tSC = ##class(IOC.Installer).Setup()
+If $$$ISERR(tSC) {
+    Do $System.Status.DisplayError(tSC)
+    Halt 1
+}
+
+Write !, "IRIS Operations Center installed successfully.", !
+Halt

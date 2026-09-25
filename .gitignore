@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Build output. frontend/dist is NOT ignored: the ZPM module ships the built SPA
+# (see module.xml), so the files have to be in the repository for an install from
+# a clone or the registry to have a UI. Run `npm run build` and commit it along
+# with any frontend change; the Docker image rebuilds it from source and ignores
+# this copy.
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+
+# IRIS
+iris/mgr/

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+  <Module>
+    <Name>iris-operations-center</Name>
+    <Version>0.1.0</Version>
+    <Description>Modern management and observability portal for InterSystems IRIS</Description>
+    <Keywords>iris,management,observability,monitoring</Keywords>
+    <SourcesRoot>iris/src</SourcesRoot>
+    <!-- The built SPA, into the CSP directory the web application serves from.
+         Name has no trailing slash, so the contents of the folder are copied.
+         The Docker image builds the SPA in its own stage and never reads this
+         copy; it is here so an install from a clone or the registry has a
+         working UI without a Node toolchain, which is why frontend/dist is
+         committed rather than ignored. -->
+    <FileCopy Name="frontend/dist" InstallDirectory="${cspdir}iris-operations/"/>
+    <!-- Creates the REST API and the SPA web application definitions. -->
+    <Invoke Class="IOC.Installer" Method="Setup"/>
+  </Module>
+</Export>

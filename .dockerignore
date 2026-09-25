@@ -1,0 +1,11 @@
+.git
+.gitignore
+node_modules
+frontend/node_modules
+# Kept out of the build context on purpose: stage 1 rebuilds the SPA from source,
+# so the committed copy must not be the one that ends up in the image.
+frontend/dist
+.DS_Store
+*.md
+.env
+.env.*

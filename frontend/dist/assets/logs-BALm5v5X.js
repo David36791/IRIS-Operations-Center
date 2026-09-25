@@ -1,0 +1,1 @@
+import{J as t,K as n}from"./index-DcswUo5g.js";function s(){return n("/logs/intelligence")}function i(e){return t("POST","/search/semantic",{query:e})}function r(e={}){return t("POST","/logs/audit",e)}export{s as a,r as g,i as s};

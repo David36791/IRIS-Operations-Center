@@ -1,0 +1,1 @@
+import{K as s,J as t}from"./index-DcswUo5g.js";function n(){return s("/system/usage")}function a(){return s("/system/processes")}function o(e){return t("DELETE",`/system/processes/${e}`)}function c(){return s("/system/memory")}function m(){return s("/system/disk")}function u(){return s("/system/devices")}export{c as a,n as b,m as c,u as d,a as g,o as t};

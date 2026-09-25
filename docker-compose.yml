@@ -1,0 +1,38 @@
+services:
+  iris:
+    build:
+      context: .
+      dockerfile: docker/iris/Dockerfile
+      args:
+        # Override via `IRIS_IMAGE=... docker compose build` if you need a pinned version.
+        BASE_IMAGE: ${IRIS_IMAGE:-intersystemsdc/irishealth-community:latest}
+    container_name: iris-operations-center
+    ports:
+      - "52773:52773" # Web server: Management Portal + /iris-operations REST API
+      - "1972:1972"   # SuperServer: ObjectScript TCP connections
+    environment:
+      TZ: ${TZ:-UTC}
+      # IRIS Copilot. Disabled unless explicitly switched on; any
+      # OpenAI-compatible endpoint works.
+      IOC_AI_ENABLED: ${IOC_AI_ENABLED:-false}
+      IOC_AI_BASE_URL: ${IOC_AI_BASE_URL:-}
+      IOC_AI_MODEL: ${IOC_AI_MODEL:-}
+      # Optional: embeddings are usually a different model (e.g. OpenAI pairs
+      # gpt-4o-mini with text-embedding-3-small). Falls back to IOC_AI_MODEL.
+      IOC_AI_EMBEDDING_MODEL: ${IOC_AI_EMBEDDING_MODEL:-}
+      IOC_AI_API_KEY: ${IOC_AI_API_KEY:-}
+    healthcheck:
+      test: ["CMD", "iris", "session", "IRIS", "-U", "%SYS", "##class(%SYSTEM.System).GetInstanceName()"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    restart: unless-stopped
+    # Uncomment to keep the instance's data across container recreation. The
+    # installer removes and recreates the web applications, so a build over an
+    # existing volume is safe.
+    # volumes:
+    #   - iris-data:/usr/irissys/mgr
+
+# volumes:
+#   iris-data:

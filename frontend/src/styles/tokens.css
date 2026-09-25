@@ -1,0 +1,260 @@
+/* Design tokens for IRIS Operations Center.
+   Style direction: modern enterprise SaaS, professional, technical,
+   clean, dense but readable. Avoid gradients, oversized cards, heavy rounding,
+   decorative animation and colour beyond status/alert/severity. */
+
+:root {
+  /* surfaces */
+  --color-bg: #f4f5f7;
+  --color-surface: #ffffff;
+  --color-surface-2: #fafbfc;
+  --color-border: #d8dce3;
+  --color-border-strong: #b9c0cb;
+
+  /* text */
+  --color-text: #1d2230;
+  --color-text-muted: #5b6475;
+  --color-text-faint: #8a93a3;
+
+  /* brand */
+  --color-primary: #2c3e91;
+  --color-primary-hover: #24327a;
+  --color-focus: #4a6cf7;
+
+  /* status — used only for status / alert / severity */
+  --status-ok: #1e8e3e;
+  --status-info: #1a73e8;
+  --status-warn: #a86300;
+  --status-error: #c5221f;
+  --status-muted: #6b7280;
+
+  --status-ok-bg: #e7f4ea;
+  --status-info-bg: #e8f1fd;
+  --status-warn-bg: #fdf1e0;
+  --status-error-bg: #fce9e8;
+  --status-muted-bg: #eef0f3;
+
+  /* spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+
+  /* shape */
+  --radius: 4px;
+  --radius-sm: 3px;
+
+  /* typography */
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  --text-xs: 11px;
+  --text-sm: 12px;
+  --text-md: 13px;
+  --text-lg: 16px;
+  --text-xl: 20px;
+
+  /* elevation — deliberately subtle */
+  --shadow-sm: 0 1px 2px rgba(20, 26, 38, 0.06);
+  --shadow-md: 0 4px 12px rgba(20, 26, 38, 0.1);
+
+  /* layout */
+  --sidebar-width: 236px;
+  --header-height: 52px;
+}
+
+/* Dark mode overrides the same tokens, so no component needs to know. */
+[data-theme='dark'] {
+  --color-bg: #14171f;
+  --color-surface: #1b1f2a;
+  --color-surface-2: #212633;
+  --color-border: #2c3242;
+  --color-border-strong: #3a4256;
+
+  --color-text: #e6e9f0;
+  --color-text-muted: #a3abbb;
+  --color-text-faint: #78818f;
+
+  --color-primary: #8ba4f8;
+  --color-primary-hover: #a3b6fa;
+  --color-focus: #8ba4f8;
+
+  --status-ok: #6ee7a0;
+  --status-info: #82b6ff;
+  --status-warn: #f0c274;
+  --status-error: #ff9188;
+  --status-muted: #9aa3b2;
+
+  --status-ok-bg: #16301f;
+  --status-info-bg: #16273f;
+  --status-warn-bg: #38290f;
+  --status-error-bg: #3a1917;
+  --status-muted-bg: #232834;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* Code blocks keep their dark surface in both themes. */
+[data-theme='dark'] .btn-primary {
+  color: #10131a;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--text-md);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-weight: 600;
+}
+
+h1 {
+  font-size: var(--text-xl);
+}
+h2 {
+  font-size: var(--text-lg);
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+code,
+pre {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 1px;
+}
+
+/* ---- Shared primitives ---- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 6px 12px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+  font-size: var(--text-md);
+  line-height: 18px;
+  cursor: pointer;
+}
+
+.btn:hover:not(:disabled) {
+  background: var(--color-surface-2);
+}
+
+.btn:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.btn-primary {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+}
+
+.btn-danger {
+  border-color: var(--status-error);
+  background: var(--status-error);
+  color: #fff;
+}
+
+.btn-quiet {
+  border-color: transparent;
+  background: transparent;
+  color: var(--color-text-muted);
+}
+
+.btn-quiet:hover:not(:disabled) {
+  background: rgba(20, 26, 38, 0.06);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.field > span {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+input,
+select,
+textarea {
+  padding: 6px 8px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+  font-size: var(--text-md);
+}
+
+.card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.page-heading {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+}
+
+.page-heading small {
+  color: var(--color-text-faint);
+  font-size: var(--text-sm);
+  font-weight: 400;
+}
+
