@@ -54,7 +54,7 @@ ClassMethod Ask(pBody As %String) As %DynamicObject
     Set tUser = {}
     Set tUser.role = "user"
     Set tUser.content = tUserText
-    Do tPayload.%Set("messages", [tSystem, tUser])
+    Do tPayload.%Set("messages", [(tSystem), (tUser)])
 
     Set tReq = ##class(%Net.HttpRequest).%New()
     Set tReq.Server = tServer

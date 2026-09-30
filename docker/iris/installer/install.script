@@ -6,16 +6,10 @@
 
 zn "USER"
 Set tSC = ##class(%SYSTEM.OBJ).LoadDir("/opt/irisbuild/src", "ck", .errlog, 1)
-If $$$ISERR(tSC) {
-    Do $System.Status.DisplayError(tSC)
-    Halt 1
-}
+If $System.Status.IsError(tSC) Do $System.Status.DisplayError(tSC) Do $System.Process.Terminate($JOB, 1)
 
 Set tSC = ##class(IOC.Installer).Setup()
-If $$$ISERR(tSC) {
-    Do $System.Status.DisplayError(tSC)
-    Halt 1
-}
+If $System.Status.IsError(tSC) Do $System.Status.DisplayError(tSC) Do $System.Process.Terminate($JOB, 1)
 
 Write !, "IRIS Operations Center installed successfully.", !
 Halt

@@ -20,7 +20,7 @@ ClassMethod Semantic(pBody As %String) As %DynamicAbstractObject
     Set tScored = []
     Set tLimit = 30
     For tIndex = 0:1:tRuns.%Size()-1 {
-        Quit:tIndex >= tLimit
+        Quit:(tIndex >= tLimit)
         Set tRun = tRuns.%Get(tIndex)
         Set tText = (tRun.%Get("Name") _ " " _ tRun.%Get("Result")) _ " " _ tRun.%Get("Namespace")
         Set tVector = ##class(IOC.API.Copilot).Embed(tText)
@@ -41,7 +41,7 @@ ClassMethod Semantic(pBody As %String) As %DynamicAbstractObject
                 Set tBest = tIndex
             }
         }
-        Quit:tBest < 0
+        Quit:(tBest < 0)
         Set tItem = tScored.%Get(tBest)
         Do tItem.%Set("ranked", 1)
         Do tSorted.%Push(tItem)
