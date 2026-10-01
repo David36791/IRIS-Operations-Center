@@ -28,6 +28,7 @@ services:
       retries: 5
       start_period: 60s
     restart: unless-stopped
+    command: /iris-main --ISCAgent false
     # Uncomment to keep the instance's data across container recreation. The
     # installer removes and recreates the web applications, so a build over an
     # existing volume is safe.
